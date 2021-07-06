@@ -1,18 +1,76 @@
 # Implement various graph data structures in Python
 
-# Class representing adjacency list of the node, i.e., what 
-class AdjNode:
-    def __init__(self,data):
-        self.vertex = data
-        self.next = None
+# Class representing a node
+class Node(object):
+    def __init__(self, key):
+        self.key = key
+        self.neighbors = {}
+        self.explored = 0
 
-# A class representing a class as a list of adjacency lists. Size of array is the number of vertices
-class Graph:
-    def __init__(self,vertices):
-        self.V = vertices
-        self.graph = [None] * self.V
+    def addNeighbor(self, neighbor, weight=0):
+        self.neighbors[neighbor] = weight
 
-# A class representing a graph as a dictionary
-class dictGraph:
-    def __init__(self,nodes=None):
-        self.nodes = None
+    def getConnections(self):
+        return self.neighbors.keys()
+
+    def getWeight(self, neighbor):
+        return self.neighbors[neighbor]
+
+# Class representing a graph
+class Graph(object):
+    def __init__(self):
+        self.nodes = {}
+
+    def addNode(self, node):
+        self.nodes[node.key] = node
+
+    def getNode(self, key):
+        try:
+            return self.nodes[key]
+        except KeyError:
+            return None
+
+    def addEdge(self, from_key, to_key, weight = 0):
+        if from_key not in self.nodes:
+            self.addNode(Node(from_key))
+        if to_key not in self.nodes:
+            self.addNode(Node(to_key))
+        
+        self.nodes[from_key].addNeighbor(self.nodes[to_key], weight)
+
+    def getNodes(self):
+        return self.nodes.keys()
+
+    def __iter__(self):
+        return iter(self.nodes.values())
+
+
+# # Test out the above code
+# g = Graph()
+# for i in range(6):
+#     g.addNode(Node(i))
+
+# print(g.nodes)
+
+# g.addEdge(0,1,1)
+# g.addEdge(0,5,1)
+# g.addEdge(1,2,1)
+# g.addEdge(2,1,1)
+
+# for n in g:
+#     for w in n.getConnections():
+#         print('{} -> {}'.format(n.key, w.key))
+
+# print(g.nodes[1].getConnections())
+
+# If one knows the nodes and edges apriori, 
+# testGraph = {
+#     0: {1:5, 5:2},
+#     1: {2:4},
+#     2: {3:9},
+#     3: {4:7, 5:3},
+#     4: {0:1},
+#     5: {4:8}
+# }
+
+# print(testGraph[0])
