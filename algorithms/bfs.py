@@ -2,7 +2,7 @@
 # This implementation will utilize adjacency lists (probably in the form of a Dictionary)
 import graphs 
 
-# def BFS1(s, G):
+# def breadthFirstSearch2(s, G):
 #     level = {s:0}
 #     parent = {s:None}
 #     i = 1
@@ -19,18 +19,19 @@ import graphs
 #         frontier = next
 #         i += 1
 
-def BFS2(G, root):
-    # Let Q be a queue
-    Q = []
-    visited = []
-    visitSeq = []
+
+def breadthFirstSearch(G, root):
+    Q = [] # Let Q be a queue in the form of a list (lists are slow due to pop operations)
+    visited = [] # visited tracks what nodes have been visited
+    visitSeq = [] # sequence of visitation
+
     visited.append(root)
     visitSeq.append(root.key)
     root.explored = 1
     Q.append(root)
+
     while Q:
         v = Q.pop(0)
-        # print(v)
         # If v is goal state then return v
         for u in v.neighbors:
             # print(u)
@@ -41,7 +42,7 @@ def BFS2(G, root):
                 Q.append(u)
     
     return visited
-    
+
 # Test out the above code
 g = graphs.Graph()
 for i in range(6):
@@ -57,7 +58,7 @@ g.addEdge(2,5,1)
 g.addEdge(4,5,1)
 
 print('------START BFS------')
-print(BFS2(g,g.nodes[0]))
+print(breadthFirstSearch(g,g.nodes[0]))
 print('------END BFS------')
 
 
