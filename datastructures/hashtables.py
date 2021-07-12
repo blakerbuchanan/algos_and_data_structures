@@ -7,45 +7,7 @@
 # 3. At this index, there exists a list of keys and values. Store the key and value in this index.
 
 import numpy as np
-
-# Definition for node in singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
-# Definition for linked list
-class LinkedList:
-    def __init__(self,head=None):
-        self.head = head
-
-    # Insert a new node at the beginning of the linked list
-    def insertNode(self, new_data):
-        # Create a new Node
-        new_node = ListNode(new_data)
- 
-        # Make the "next" of new node the current head
-        new_node.next = self.head
- 
-        # Make the new head the new node "new_node"
-        self.head = new_node
-
-    # Delete head of linked list (stack implementation)
-    def pop(self):
-        current_node = self.head
-        self.head = current_node.next
-
-    def deleteNode(self, key):
-        return None
-
-    def search(self,search_val):
-        currentNode = self.head
-
-        while currentNode != None:
-            if currentNode.val == search_val:
-                return currentNode.val
-
-        return "Error: Data could not be located in linked list."
+import slinkedlist as sll
 
 def mapToIndex(hash_key,array_length):
     return hash(hash_key) % array_length
@@ -59,11 +21,11 @@ array_test = np.empty(5, dtype=object)
 hash_key_test = hash(key_test)
 
 # Compute the index at which to store test value
-idx = mapToIndex(hash_key_test,len(array_test))
+idx = sll.mapToIndex(hash_key_test,len(array_test))
 
 # Create linked list for storage (to avoid collisions)
-linkedlist_test = LinkedList()
-linkedlist_test.head = ListNode(value_test)
+linkedlist_test = sll.LinkedList()
+linkedlist_test.head = sll.ListNode(value_test)
 
 # In more involved implementations, one would need to check the index idx computed
 # to see if a linked list already exists there (this would mean two keys have the same
