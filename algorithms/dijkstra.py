@@ -38,9 +38,8 @@ def dijkstra(G,s):
 
     while Q:
         # print(Q.Q)
-        uIdx,uMin = Q.pullMin()
-        # import ipdb; ipdb.set_trace()
-        u = Q.Q[uIdx]
+        u = Q.pullMin()
+        
         S.append(u)
         # import ipdb; ipdb.set_trace()
         for v in u.neighbors:

@@ -2,8 +2,8 @@
 import slinkedlist as sll
 import math
 Inf = math.inf
-
-# This implementation of priority queues currently only works with weighted priorities >= 0
+# Queue utilizes first-in-first-out
+# This implementation of priority queues currently only works with weighted priorities >= 0. min-priority queue = (lower priority) -> (higher weight), (higher priority) -> (lower weight)
 class Node(object):
     def __init__(self, priority=0, data=None):
         self.priority = priority
@@ -21,31 +21,51 @@ class PriorityQueue:
         return False
     
     def insert(self, node):
+        # self.Q.append(node)
+
+        if node.priority <= self.minimum:
+            self.nodeMinimum.append(self.minimum)
+            self.minimum = node.priority
+        else:
+            self.nodeMinimum.append(self.minimum)
+            
         self.Q.append(node)
     
+    def pop(self):
+        if len(self.Q) != 0: 
+            self.Q.pop(0)
+            self.minimum = self.nodeMinimum[0]
+            return self.nodeMinimum.pop(0)
+        else:
+            return None
+    
     def pullMax(self):
-        highest = 0
-        for i in range(len(self.Q)):
-            if self.Q[i].priority > highest:
-                highestIdx = i
-                highest = self.Q[i].priority
+        # highest = 0
+        # for i in range(len(self.Q)):
+        #     if self.Q[i].priority > highest:
+        #         highestIdx = i
+        #         highest = self.Q[i].priority
         
-        self.Q.pop(highestIdx)
-        return highestIdx,highest
+        # self.Q.pop(highestIdx)
+        # return highestIdx,highest
+        return self.maximum
 
     def pullMin(self):
-        if self.Q:
-            lowest = Inf
-            # lowestIdx = 0
-            for i in range(len(self.Q)):
-                if self.Q[i].priority < lowest:
-                    print(self.Q[i].priority)
-                    lowestIdx = i
-                    lowest = self.Q[i].priority
+        # if self.Q:
+        #     lowest = Inf
+        #     # lowestIdx = 0
+        #     for i in range(len(self.Q)):
+        #         if self.Q[i].priority < lowest:
+        #             print(self.Q[i].priority)
+        #             lowestIdx = i
+        #             lowest = self.Q[i].priority
 
-            # import ipdb; ipdb.set_trace()
-            self.Q.pop(lowestIdx)
-            return lowestIdx, lowest
+        #     # import ipdb; ipdb.set_trace()
+        #     self.Q.pop(lowestIdx)
+        #     return lowestIdx, lowest
+        minReturn = self.minimum
+        u = self.pop()
+        return u
 
     def peek(self):
         highest = 0
