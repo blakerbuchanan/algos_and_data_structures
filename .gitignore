@@ -4,3 +4,4 @@ venv*
 # Other
 *.pyc
 __pycache__
+workspace.code-workspace
