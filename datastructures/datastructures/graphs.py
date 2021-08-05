@@ -1,13 +1,15 @@
 # Implement various graph data structures in Python
+import math
+Inf = math.inf
 
 # Class representing a node
 class Node(object):
-    def __init__(self, key, priority=0):
+    def __init__(self, key, priority=0, d=0):
         self.key = key
         self.neighbors = {}
         self.explored = 0
-        self.priority = priority
-
+        self.d = d
+    
     def addNeighbor(self, neighbor, weight=0):
         self.neighbors[neighbor] = weight
 
@@ -49,33 +51,19 @@ class Graph(object):
 
 # Test out the above code
 g = Graph()
-for i in range(6):
+nodeNames = ['r','s','t','u','v','w','x','y']
+for i in nodeNames:
     g.addNode(Node(i))
 
 # print(g.nodes)
 
-g.addEdge(0,1,1)
-g.addEdge(0,5,1)
-g.addEdge(1,2,1)
-g.addEdge(2,1,3)
-node2 = g.nodes[2]
-
-print(node2.getWeight(g.nodes[1]))
-
-# for n in g:
-#     for w in n.getConnections():
-#         print('{} -> {}'.format(n.key, w.key))
-
-# print(g.nodes[1].getConnections())
-
-# If one knows the nodes and edges apriori, 
-# testGraph = {
-#     0: {1:5, 5:2},
-#     1: {2:4},
-#     2: {3:9},
-#     3: {4:7, 5:3},
-#     4: {0:1},
-#     5: {4:8}
-# }
-
-# print(testGraph[0])
+g.addEdge('s','w',1)
+g.addEdge('s','r',1)
+g.addEdge('r','v',1)
+g.addEdge('w','t',1)
+g.addEdge('w','x',1)
+g.addEdge('t','x',1)
+g.addEdge('t','u',1)
+g.addEdge('x','y',1)
+g.addEdge('u','x',1)
+g.addEdge('u','y',1)
