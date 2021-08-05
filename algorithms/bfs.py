@@ -59,5 +59,8 @@ print('------START BFS------')
 BFS = breadthFirstSearch(g,g.nodes['s'])
 print('------END BFS------')
 
+# print
+visitationOrder = [node.key for node in BFS]
+print(visitationOrder)
 
 

@@ -33,14 +33,18 @@ class Graph(object):
         except KeyError:
             return None
 
-    def addEdge(self, from_key, to_key, weight = 0):
+    def addEdge(self, from_key, to_key, weight = 0, directed=True):
         if from_key not in self.nodes:
             self.addNode(Node(from_key))
         if to_key not in self.nodes:
             self.addNode(Node(to_key))
         
-        self.nodes[from_key].addNeighbor(self.nodes[to_key], weight)
-        self.nodes[to_key].addNeighbor(self.nodes[from_key], weight)
+        # If edge is directed, add neighbor for nodes[from_key] 
+        if directed:
+            self.nodes[from_key].addNeighbor(self.nodes[to_key], weight)
+        else: # Otherwise, add neighbors for both nodes[from_key] and nodes[to_key]
+            self.nodes[to_key].addNeighbor(self.nodes[from_key], weight)
+            self.nodes[from_key].addNeighbor(self.nodes[to_key], weight)
 
     def getNodes(self):
         return self.nodes.keys()
@@ -57,13 +61,13 @@ for i in nodeNames:
 
 # print(g.nodes)
 
-g.addEdge('s','w',1)
-g.addEdge('s','r',1)
-g.addEdge('r','v',1)
-g.addEdge('w','t',1)
-g.addEdge('w','x',1)
-g.addEdge('t','x',1)
-g.addEdge('t','u',1)
-g.addEdge('x','y',1)
-g.addEdge('u','x',1)
-g.addEdge('u','y',1)
+g.addEdge('s','w',1,False)
+g.addEdge('s','r',1,False)
+g.addEdge('r','v',1,False)
+g.addEdge('w','t',1,False)
+g.addEdge('w','x',1,False)
+g.addEdge('t','x',1,False)
+g.addEdge('t','u',1,False)
+g.addEdge('x','y',1,False)
+g.addEdge('u','x',1,False)
+g.addEdge('u','y',1,False)

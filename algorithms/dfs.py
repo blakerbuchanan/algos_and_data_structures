@@ -1,7 +1,7 @@
 # Implement a depth-first search algorithm for tree or graph search 
 # This implementation will utilize adjacency lists (probably in the form of a Dictionary)
 
-import graphs 
+from datastructures import graphs
 
 def depthFirstSearch(G,v,visited,visitSeq):
     # visited = []
