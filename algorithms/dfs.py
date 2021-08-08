@@ -3,7 +3,7 @@
 
 from datastructures import graphs
 
-def depthFirstSearch(G,v,visited,visitSeq):
+def depthFirstSearchRec(G,v,visited,visitSeq):
     # visited = []
     visited.append(v)
     # visitSeq = []
@@ -11,25 +11,71 @@ def depthFirstSearch(G,v,visited,visitSeq):
 
     for u in v.neighbors:
         if u not in visited:
-            depthFirstSearch(G,u,visited,visitSeq)
+            depthFirstSearchRec(G,u,visited,visitSeq)
 
     return visitSeq
 
-# Test out the above code
-g = graphs.Graph()
-for i in range(6):
-    g.addNode(graphs.Node(i))
+def depthFirstSearchVisit(G,u,time):
+    time += 1
+    u.d = time
+    u.explored = -1
+    for v in u.neighbors:
+        if v.explored == 0:
+            v.pi = u
+            depthFirstSearchVisit(G,v,time)
+    
+    u.explored = 1
+    print(u.key)
+    time += 1
 
-g.addEdge(0,1,1)
-g.addEdge(0,2,1)
-g.addEdge(1,3,1)
-g.addEdge(1,4,1)
-g.addEdge(2,5,1)
-g.addEdge(4,5,1)
+def depthFirstSearch(G):
+    for node in G:
+        node.explored = 0
+        node.pi = None
+    time = 0
+    for node in G:
+        if node.explored == 0:
+            depthFirstSearchVisit(G,node,time)
 
-print('------START DFS------')
-visited=[]
-visitSeq=[]
-finalSeq = depthFirstSearch(g,g.nodes[0],visited,visitSeq)
-print(finalSeq)
-print('------END DFS------')
+if __name__ == "__main__":
+
+    # Consider the following example in Introduction to Algorithms by Cormen (Fig. 22.4)
+    #
+    #    u --> v     w
+    #    |    ^|    ^|
+    #    |   / |   / |
+    #    |  /  |  /  |
+    #    v /   v /   v
+    #    x <-- y     z <-|
+    #                 \__| 
+    #                 
+    #                 
+    # Do depth-first search on the graph and print the order of node visitation.
+    # We expect the order of vistation for depth-first search to be x, y, v, u, z, w
+
+    g = graphs.Graph()
+
+    nodeNames = ['u','v','w','x','y','z']
+    for i in nodeNames:
+        new_node = graphs.Node(i)
+        new_node.key = i
+        g.addNode(new_node)
+
+    g.addEdge('u','v',1,True)
+    g.addEdge('u','x',1,True)
+    g.addEdge('x','v',1,True)
+    g.addEdge('y','x',1,True)
+    g.addEdge('v','y',1,True)
+    g.addEdge('w','y',1,True)
+    g.addEdge('w','z',1,True)
+
+    print('------START DFS------')
+    DFS = depthFirstSearch(g)
+    print('------END DFS------')
+
+    # print('------START DFS------')
+    # visited=[]
+    # visitSeq=[]
+    # finalSeq = depthFirstSearchRec(g,g.nodes[0],visited,visitSeq)
+    # print(finalSeq)
+    # print('------END DFS------')

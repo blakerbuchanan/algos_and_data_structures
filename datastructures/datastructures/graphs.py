@@ -9,7 +9,8 @@ class Node(object):
         self.neighbors = {}
         self.explored = 0
         self.d = d
-    
+        self.pi = None
+        
     def addNeighbor(self, neighbor, weight=0):
         self.neighbors[neighbor] = weight
 
@@ -53,21 +54,22 @@ class Graph(object):
         return iter(self.nodes.values())
 
 
-# Test out the above code
-g = Graph()
-nodeNames = ['r','s','t','u','v','w','x','y']
-for i in nodeNames:
-    g.addNode(Node(i))
+if __name__ == "__main__":
+    # Test out the above code
+    g = Graph()
+    nodeNames = ['r','s','t','u','v','w','x','y']
+    for i in nodeNames:
+        g.addNode(Node(i))
 
-# print(g.nodes)
+    # print(g.nodes)
 
-g.addEdge('s','w',1,False)
-g.addEdge('s','r',1,False)
-g.addEdge('r','v',1,False)
-g.addEdge('w','t',1,False)
-g.addEdge('w','x',1,False)
-g.addEdge('t','x',1,False)
-g.addEdge('t','u',1,False)
-g.addEdge('x','y',1,False)
-g.addEdge('u','x',1,False)
-g.addEdge('u','y',1,False)
+    g.addEdge('s','w',1,False)
+    g.addEdge('s','r',1,False)
+    g.addEdge('r','v',1,False)
+    g.addEdge('w','t',1,False)
+    g.addEdge('w','x',1,False)
+    g.addEdge('t','x',1,False)
+    g.addEdge('t','u',1,False)
+    g.addEdge('x','y',1,False)
+    g.addEdge('u','x',1,False)
+    g.addEdge('u','y',1,False)

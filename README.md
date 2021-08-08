@@ -18,4 +18,4 @@ pip install -e .
 ```
 
 ## Testing algorithms 
-Most of the algorithm implementations should contain an example and be runnable as a script on its own for verifying their functionality. Feel free to design your own example and test it out.
+Most of the algorithm implementations should contain an example and be runnable as a script on its own for verifying its functionality. Feel free to design your own example and test it out.
