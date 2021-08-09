@@ -1,6 +1,7 @@
 # Definition for node in singly-linked list.
 class ListNode:
-    def __init__(self, val=0, next=None):
+    def __init__(self, val=None, next=None):
+        self.key = None
         self.val = val
         self.next = next
 
@@ -58,6 +59,15 @@ class LinkedList:
 
         while currentNode != None:
             if currentNode.val == search_val:
+                return currentNode.val
+
+        return "Error: Data could not be located in linked list."
+
+    def searchKeyValue(self, search_key):
+        currentNode = self.head
+
+        while currentNode != None:
+            if currentNode.key == search_key:
                 return currentNode.val
 
         return "Error: Data could not be located in linked list."

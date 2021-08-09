@@ -22,8 +22,10 @@ class Node(object):
 
 # Class representing a graph
 class Graph(object):
-    def __init__(self, dist=None):
+    def __init__(self, do_tps=False):
         self.nodes = {}
+        self.do_tps = do_tps
+        self.tps = None
 
     def addNode(self, node):
         self.nodes[node.key] = node

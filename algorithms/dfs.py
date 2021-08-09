@@ -2,6 +2,7 @@
 # This implementation will utilize adjacency lists (probably in the form of a Dictionary)
 
 from datastructures import graphs
+from datastructures import slinkedlist
 
 def depthFirstSearchRec(G,v,visited,visitSeq):
     # visited = []
@@ -25,17 +26,31 @@ def depthFirstSearchVisit(G,u,time):
             depthFirstSearchVisit(G,v,time)
     
     u.explored = 1
+    if G.do_tps == True:
+        G.tps.insertNode(u.key)
+
     print(u.key)
     time += 1
 
 def depthFirstSearch(G):
+    
     for node in G:
         node.explored = 0
         node.pi = None
     time = 0
+
+    if G.do_tps == True:
+        topo_sort = slinkedlist.LinkedList()
+        G.tps = topo_sort
+
     for node in G:
         if node.explored == 0:
             depthFirstSearchVisit(G,node,time)
+
+    if G.do_tps == True:
+        return G.tps
+    else:
+        return None
 
 if __name__ == "__main__":
 

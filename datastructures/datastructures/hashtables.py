@@ -1,3 +1,4 @@
+# 
 # Implement hash tables
 # Hash tables in Python are implemented via Dictionaries, but it may be nice to implement it on my own. Let's get to it.
 
@@ -9,32 +10,59 @@
 import numpy as np
 import slinkedlist as sll
 
-def mapToIndex(hash_key,array_length):
-    return hash(hash_key) % array_length
+class HashTable:
+    def __init__(self, table = None):
+        self.table = table
+    
+    def mapToIndex(hash_key, array_length):
+        return hash_key % array_length
 
-# Create a simple test case
-key_test = "test"
-value_test = "success"
-array_test = np.empty(5, dtype=object)
+    def addKeyValuePair(self, key, value):
+        # Create the hash key
+        hash_key = hash(key)
 
-# Create the hash key for the test key
-hash_key_test = hash(key_test)
+        # Compute the index at which to store test value
+        # idx = self.mapToIndex(hash_key, np.size(self.table))
+        idx = hash_key % np.size(self.table)
 
-# Compute the index at which to store test value
-idx = sll.mapToIndex(hash_key_test,len(array_test))
+        # Create linked list for storage (to avoid collisions)
+        linkedlist = sll.LinkedList()
+        linkedlist.head = sll.ListNode(value)
+        linkedlist.head.key = key
+        
+        # In more involved implementations, one would need to check the index idx computed
+        # to see if a linked list already exists there (this would mean two keys have the same
+        # hash code or that two different hash codes map to the same index). If this is the case,
+        # one would need to add a node with the associated data to the existing linked list.
+        # Note: Implement the above case.
 
-# Create linked list for storage (to avoid collisions)
-linkedlist_test = sll.LinkedList()
-linkedlist_test.head = sll.ListNode(value_test)
+        # Store linked list at idx in test array
+        self.table[idx] = linkedlist
 
-# In more involved implementations, one would need to check the index idx computed
-# to see if a linked list already exists there (this would mean two keys have the same
-# hash code or that two different hash codes map to the same index). If this is the case,
-# one would need to add a node with the associated data to the existing linked list.
-# Note: Implement the above case.
+    def getValue(self, key):
+        hash_key = hash(key)
+        
+        # idx = self.mapToIndex(hash_key,np.size(self.table))
+        idx = hash_key % np.size(self.table)
+        linkedlist = self.table[idx]
 
-# Store linked list at idx in test array
-array_test[idx] = linkedlist_test
+        return linkedlist.searchKeyValue(key)
+    
+    def deleteItem(self):
+        return None
 
-# With only a single key corresponding to one hash code, this is a trivial search over a linked list.
-print(linkedlist_test.search(value_test))
+if __name__ == "__main__":
+    # Note: Works, but there currently exists an issue with searching through a linked list. Likely due to collision of key-value pairs.
+    # Create a simple test case
+    key_test = "test"
+    value_test = "success"
+    HT = HashTable()
+    HT.table = np.empty(5, dtype=object)
+    
+    HT.addKeyValuePair(key_test, value_test)
+    HT.addKeyValuePair("socks","shoes")
+    HT.addKeyValuePair("hello","goodbye")
+
+    print(HT.getValue(key_test))
+    print(HT.getValue("socks"))
+    print(HT.getValue("hello"))
