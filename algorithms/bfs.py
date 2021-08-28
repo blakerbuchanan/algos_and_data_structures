@@ -27,40 +27,41 @@ def breadthFirstSearch(G, root):
     
     return visited
 
-g = graphs.Graph()
+if __name__ == "__main__":
+    g = graphs.Graph()
 
-nodeNames = ['r','s','t','u','v','w','x','y']
-for i in nodeNames:
-    new_node = graphs.Node(i)
-    new_node.key = i
-    g.addNode(new_node)
+    nodeNames = ['r','s','t','u','v','w','x','y']
+    for i in nodeNames:
+        new_node = graphs.Node(i)
+        new_node.key = i
+        g.addNode(new_node)
 
-# Consider the following graph from Introduction to Algorithms by Cormen given in Fig. 22.3
-# 
-#      r --- s   t ----- u
-#      |     | /  \      |
-#      v     w --- x --- y
-# 
-# Beginning at node 's', do breadth-first search on the graph to compute the 
-# distances from 's' to every other node in the graph.
+    # Consider the following graph from Introduction to Algorithms by Cormen given in Fig. 22.3
+    # 
+    #      r --- s   t ----- u
+    #      |     | /  \      |
+    #      v     w --- x --- y
+    # 
+    # Beginning at node 's', do breadth-first search on the graph to compute the 
+    # distances from 's' to every other node in the graph.
 
-g.addEdge('s','w',1)
-g.addEdge('s','r',1)
-g.addEdge('r','v',1)
-g.addEdge('w','t',1)
-g.addEdge('w','x',1)
-g.addEdge('t','x',1)
-g.addEdge('t','u',1)
-g.addEdge('x','y',1)
-g.addEdge('u','x',1)
-g.addEdge('u','u',1)
+    g.addEdge('s','w',1)
+    g.addEdge('s','r',1)
+    g.addEdge('r','v',1)
+    g.addEdge('w','t',1)
+    g.addEdge('w','x',1)
+    g.addEdge('t','x',1)
+    g.addEdge('t','u',1)
+    g.addEdge('x','y',1)
+    g.addEdge('u','x',1)
+    g.addEdge('u','u',1)
 
-print('------START BFS------')
-BFS = breadthFirstSearch(g,g.nodes['s'])
-print('------END BFS------')
+    print('------START BFS------')
+    BFS = breadthFirstSearch(g,g.nodes['s'])
+    print('------END BFS------')
 
-# print
-visitationOrder = [node.key for node in BFS]
-print(visitationOrder)
+    # print
+    visitationOrder = [node.key for node in BFS]
+    print(visitationOrder)
 
 

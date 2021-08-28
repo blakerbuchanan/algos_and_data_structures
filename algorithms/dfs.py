@@ -26,8 +26,9 @@ def depthFirstSearchVisit(G,u,time):
             depthFirstSearchVisit(G,v,time)
     
     u.explored = 1
+    u.fin_time = time
     if G.do_tps == True:
-        G.tps.insertNode(u.key)
+        G.tps.insertNode(u)
 
     print(u.key)
     time += 1

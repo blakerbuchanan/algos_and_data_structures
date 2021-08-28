@@ -49,22 +49,23 @@ class TreeTraversal:
             
         return nodeList
 
-# The following code tests a binary search tree from Introduction to Algorithms by Cormen
-root = TreeNode(6)
-node2 = TreeNode(5)
-node3 = TreeNode(2)
-node4 = TreeNode(5)
-node5 = TreeNode(7)
-node6 = TreeNode(8)
+if __name__ == "__main__":
+    # The following code tests a binary search tree from Introduction to Algorithms by Cormen
+    root = TreeNode(6)
+    node2 = TreeNode(5)
+    node3 = TreeNode(2)
+    node4 = TreeNode(5)
+    node5 = TreeNode(7)
+    node6 = TreeNode(8)
 
-root.left = node2
-root.right = node5
-node2.left = node3
-node2.right = node4
-node5.right = node6
+    root.left = node2
+    root.right = node5
+    node2.left = node3
+    node2.right = node4
+    node5.right = node6
 
-nodeList = []
-newTraversal = TreeTraversal()
-nodeSequence = newTraversal.inorderTraversal(root)
-# Expect [2, 5, 5, 6, 7, 8] for in-order Traversal
-print(nodeSequence)
+    nodeList = []
+    newTraversal = TreeTraversal()
+    nodeSequence = newTraversal.inorderTraversal(root)
+    # Expect [2, 5, 5, 6, 7, 8] for in-order Traversal
+    print(nodeSequence)

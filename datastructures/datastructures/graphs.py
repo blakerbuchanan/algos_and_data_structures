@@ -9,7 +9,8 @@ class Node(object):
         self.neighbors = {}
         self.explored = 0
         self.d = d
-        self.pi = None
+        self.fin_time = 0
+        self.priority = priority
         
     def addNeighbor(self, neighbor, weight=0):
         self.neighbors[neighbor] = weight
@@ -34,7 +35,7 @@ class Graph(object):
         try:
             return self.nodes[key]
         except KeyError:
-            return None
+            return 'Error: No node associated with key ' + str(key)
 
     def addEdge(self, from_key, to_key, weight = 0, directed=True):
         if from_key not in self.nodes:

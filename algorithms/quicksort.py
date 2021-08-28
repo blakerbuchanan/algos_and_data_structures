@@ -22,9 +22,10 @@ def quicksort(A,p,r):
         quicksort(A,q+1,r)   
     return A
 
-# Quicksort is a divide-and-conquer algorithm
-A = [4, 1, 23, 9, 1, 3]
-r = len(A)-1
-finalA = quicksort(A,0,r)
+if __name__ == "__main__":
+    # Quicksort is a divide-and-conquer algorithm
+    A = [4, 1, 23, 9, 1, 3]
+    r = len(A)-1
+    finalA = quicksort(A,0,r)
 
-print(finalA)
+    print(finalA)

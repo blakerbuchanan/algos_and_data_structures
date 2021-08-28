@@ -1,5 +1,5 @@
 # Implement priority queues
-import slinkedlist as sll
+from datastructures import slinkedlist as sll
 import math
 Inf = math.inf
 # Queue utilizes first-in-first-out
@@ -35,6 +35,16 @@ class PriorityQueue:
 
         self.Q.remove(highest)
         return highest
+
+    def extractMin(self):
+        
+        lowest = self.Q[0]
+        for node in self.Q:
+            if lowest.priority > node.priority:
+                lowest = node
+
+        self.Q.remove(lowest)
+        return lowest
 
     def peek(self):
         for node in self.Q:
