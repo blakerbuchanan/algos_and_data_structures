@@ -38,6 +38,7 @@ def depthFirstSearch(G):
     for node in G:
         node.explored = 0
         node.pi = None
+        
     time = 0
 
     if G.do_tps == True:

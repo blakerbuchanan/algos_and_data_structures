@@ -9,6 +9,7 @@ class Node(object):
         self.neighbors = {}
         self.explored = 0
         self.d = d
+        self.pi = None
         self.fin_time = 0
         self.priority = priority
         

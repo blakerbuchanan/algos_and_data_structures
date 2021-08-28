@@ -5,18 +5,17 @@ import numpy as np
 import math
 Inf = math.inf
 
-def relax(u,v,w,dist,pred):
-    
-    if dist[v.key] > dist[u.key] + w:
-
-        dist[v.key] = dist[u.key] + w
-        pred[v.key] = u
+def relax(u,v,w):
+    if v.d > u.d + w:
+        v.d = u.d + w
+        v.pi = u
 
 def dijkstra(G,s):
     # Initialize (G,s)
     # Initialize distance from s -> s
-    dist = {s.key: 0}
-    pred = {}
+    # dist = {s.key: 0}
+    # pred = {}
+    s.d = 0
 
     S = []
     Q = PQ.PriorityQueue()
@@ -26,9 +25,12 @@ def dijkstra(G,s):
         node = G.getNode(key)
         if node != s:
             # Initialize priority values
-            dist[node.key] = Inf
-            pred[node.key] = None
-            node.priority = dist[node.key]
+            # dist[node.key] = Inf
+            node.d = Inf
+            # pred[node.key] = None
+            node.pi = None
+            # node.priority = dist[node.key]
+            node.priority = node.d
         
         Q.insert(node)
 
@@ -39,8 +41,15 @@ def dijkstra(G,s):
 
         for v in u.neighbors:
             w = v.getWeight(u)
-            relax(u,v,w,dist,pred)
+            # relax(u,v,w,dist,pred)
+            relax(u,v,w)
     
+    dist = {}
+    pred = {}
+    for node in G:
+        dist[node.key] = node.d
+        pred[node.key] = node.pi
+
     return dist, pred
 
 if __name__ == "__main__":
