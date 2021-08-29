@@ -28,6 +28,7 @@ class Graph(object):
         self.nodes = {}
         self.do_tps = do_tps
         self.tps = None
+        self.time = 0
 
     def addNode(self, node):
         self.nodes[node.key] = node

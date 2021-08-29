@@ -16,29 +16,28 @@ def depthFirstSearchRec(G,v,visited,visitSeq):
 
     return visitSeq
 
-def depthFirstSearchVisit(G,u,time):
-    time += 1
-    u.d = time
+def depthFirstSearchVisit(G,u):
+    G.time += 1
+    u.d = G.time
     u.explored = -1
     for v in u.neighbors:
         if v.explored == 0:
             v.pi = u
-            depthFirstSearchVisit(G,v,time)
+            depthFirstSearchVisit(G,v)
     
     u.explored = 1
-    u.fin_time = time
     if G.do_tps == True:
         G.tps.insertNode(u)
 
-    print(u.key)
-    time += 1
+    G.time += 1
+    u.fin_time = G.time
 
 def depthFirstSearch(G):
     
     for node in G:
         node.explored = 0
         node.pi = None
-        
+
     time = 0
 
     if G.do_tps == True:
@@ -47,7 +46,7 @@ def depthFirstSearch(G):
 
     for node in G:
         if node.explored == 0:
-            depthFirstSearchVisit(G,node,time)
+            depthFirstSearchVisit(G,node)
 
     if G.do_tps == True:
         return G.tps
